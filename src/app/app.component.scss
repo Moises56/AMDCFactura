@@ -1,0 +1,35 @@
+
+
+.toolbar-background {
+    inset: 0px;
+    position: absolute;
+    transform: translateZ(0px);
+    border-width: var(--border-width);
+    border-style: var(--border-style);
+    border-color: var(--border-color);
+    background: #5ccedf !important;
+    contain: strict;
+    opacity: calc(var(--opacity)* var(--opacity-scale));
+    z-index: -1;
+    pointer-events: none;
+}
+
+ion-list-header {
+    --background: #19422d;
+    --color: #fff;
+  
+    --border-width: 0 0 4px 0;
+    --border-color: #f24aec;
+    --border-style: double;
+  }
+
+  .title-AMDC{
+    margin-left: 30% !important;
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }

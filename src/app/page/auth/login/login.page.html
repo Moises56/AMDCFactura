@@ -1,0 +1,92 @@
+<ion-content [fullscreen]="true">
+  <!-- <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="m1"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>login</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <!-- Login Page -->
+  <div class="container" *ngIf="screen == 'signin'">
+    <ion-avatar class="ion-app-logo">
+      <img alt="Logo AMDC" src="assets/logos/Logo_Belleza.png" />
+    </ion-avatar>
+    <h3 class="heading">AMDC<br /><br /></h3>
+    <!-- <p class="para">Login</p> -->
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      autocomplete="off"
+      novalidate
+    >
+      <ion-item lines="none" class="ion-item">
+        <fieldset class="input-item">
+          <legend>Username</legend>
+          <ion-input
+            formControlName="username"
+            type="text"
+            placeholder="username"
+          ></ion-input>
+        </fieldset>
+      </ion-item>
+      <ion-item lines="none" class="ion-item">
+        <fieldset class="input-item">
+          <legend>Password</legend>
+          <ion-input
+            formControlName="password"
+            type="password"
+            placeholder="*******"
+          ></ion-input>
+        </fieldset>
+      </ion-item>
+      <p class="forget-text">
+        <a (click)="change('forget')">Forgot Password</a>
+      </p>
+      <p class="signup-text">
+        I'm a new user&nbsp;<a (click)="change('signup')">Sign Up</a>
+      </p>
+      <ion-button
+        class="login-button button-native"
+        (click)="login()"
+        id="open-loading"
+        expand="block"
+        >INICIAR SESION</ion-button
+      >
+      <hr />
+      <!-- <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button color="light"
+              ><ion-icon name="logo-google"></ion-icon
+            ></ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="light"
+              ><ion-icon name="logo-facebook"></ion-icon
+            ></ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="light"
+              ><ion-icon name="logo-linkedin"></ion-icon
+            ></ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+    </form>
+  </div>
+</ion-content>
+
+<ion-loading
+  trigger="open-loading"
+  message="Loading..."
+  duration="3000"
+  class="custom-loading"
+></ion-loading>
+<ion-footer color="white">
+  <ion-toolbar>
+    <p class="copyright"><a>AMDC</a></p>
+  </ion-toolbar>
+</ion-footer>

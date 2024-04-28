@@ -1,0 +1,234 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mercado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card-header>
+    <ion-card-title class="mercado-text">
+      <b>MERCADOS</b>
+    </ion-card-title>
+    <ion-button class="new-market" (click)="newMArket(true)" expand="block">
+      <ion-icon name="add-outline"></ion-icon>Nuevo
+    </ion-button>
+  </ion-card-header>
+
+  <!-- mostrar mensaje de mercado add -->
+  @if (StatusAdd == 'ok') {
+  <ion-alert
+    isOpen="{true}"
+    header="AMDC"
+    message="{{ messageAdd }}"
+    [buttons]="alertButtons"
+  ></ion-alert>
+  }
+  <!-- Eliminar Market -->
+  @if (messageDel) {
+  <ion-alert
+    isOpen="{true}"
+    header="AMDC"
+    message="{{ messageDel }}"
+    [buttons]="alertButtons"
+  ></ion-alert>
+  }
+  <!-- Editar -->
+  @if (messageEdit) {
+  <ion-alert
+    trigger="present-alert"
+    header="Please enter your info"
+    [buttons]="alertButtons"
+    [inputs]="alertInputs"
+  ></ion-alert>
+
+  } @for (m of Markets; track m.id) {
+
+  <ion-card>
+    <ion-button class="btn-Ver-Locales" (click)="verLocales(true, m.id)"
+      >Ver</ion-button
+    >
+    <ion-card-header>
+      <ion-card-title><b>{{m.nombre_mercado}}</b></ion-card-title>
+      <ion-card-subtitle><b>#{{m.id}}</b></ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content><b>Direccion</b>: {{m.direccion}} </ion-card-content>
+    <!-- mostrar la fecha y hora usando el campo de fecha_creacion formateado -->
+    <ion-card-content>
+      <b>Fecha</b>: {{m.fecha_creacion | date: 'dd/MM/yyyy'}}
+    </ion-card-content>
+
+    <ion-button
+      isOpen="{true}"
+      expand="block"
+      fill="clear"
+      class="ion-float-right btn-delete"
+      (click)="showAlert(m.id, m.nombre_mercado)"
+      ><ion-icon name="trash-outline"></ion-icon
+    ></ion-button>
+    <ion-button
+      fill="clear"
+      class="ion-float-right btn-edit"
+      (click)="showAlertEdit(m.id, m.nombre_mercado)"
+      ><ion-icon name="create-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+  }
+
+  <!-- Modal Add Market-->
+  <ion-modal
+    [isOpen]="isModalOpenN"
+    trigger="open-modal"
+    (willDismiss)="onWillDismiss($event)"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="tertiary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelN()" color="danger">Cancelar</ion-button>
+          </ion-buttons>
+          <ion-title class="title-Modal">Nuevo</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="guardar()" [strong]="true">Guardar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form [formGroup]="FormGroup" autocomplete="off" novalidate>
+          <ion-item>
+            <ion-input
+              label="Ingresar Nombre del Mercado"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Nombre"
+              formControlName="nombre_mercado"
+            ></ion-input>
+            @if (nombre_mercadoField.hasError('required')) {
+            <ion-text color="warning">El nombre es requerido</ion-text>
+            }
+          </ion-item>
+
+          <!-- direccion -->
+          <ion-item>
+            <ion-input
+              label="Ingresar Direccion"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Direccion"
+              formControlName="direccion"
+            ></ion-input>
+            @if (direccionField.hasError('required')) {
+            <ion-text color="warning">La direccion es requerida</ion-text>
+            }
+          </ion-item>
+
+          <!-- latitud -->
+          <ion-item>
+            <ion-input
+              label="Ingresar Latitud"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Latitud"
+              formControlName="latitud"
+            ></ion-input>
+            @if(latitudField.hasError('required')) {
+            <ion-text color="warning">La latitud es requerida</ion-text>
+            }
+          </ion-item>
+
+          <!-- longitud -->
+          <ion-item>
+            <ion-input
+              label="Ingresar Longitud"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Longitud"
+              formControlName="longitud"
+            ></ion-input>
+            @if(longitudField.hasError('required')) {
+            <ion-text color="warning">La longitud es requerida</ion-text>
+            }
+          </ion-item>
+        </form>
+
+        @if ( messageErrorF ) {
+        <ion-text color="danger">{{ messageErrorF }}</ion-text>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Modal Localidades -->
+  <ion-modal
+    id="example-modal"
+    #modal
+    [isOpen]="isModalOpen"
+    [initialBreakpoint]="0.99"
+    [breakpoints]="[0, 0.25, 0.5, 0.75]"
+  >
+    <ng-template>
+      <div class="wrapper"></div>
+      <ion-buttons slot="start">
+        <ion-button class="btn-cancelarL" color="medium" (click)="cancel()"
+          >Cerrar</ion-button
+        >
+      </ion-buttons>
+
+      <ion-content>
+        <ion-searchbar
+          placeholder="Search"
+          (click)="modal.setCurrentBreakpoint(0.75)"
+        ></ion-searchbar>
+        <ion-list>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Connor Smith</h2>
+              <p>Sales Rep</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Daniel Smith</h2>
+              <p>Product Designer</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Greg Smith</h2>
+              <p>Director of Operations</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Zoey Smith</h2>
+              <p>CEO</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<!-- Footer -->
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="footer-text"> AMDC </ion-title>
+  </ion-toolbar>
+</ion-footer>
