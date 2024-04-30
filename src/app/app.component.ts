@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 // ionic icosn
-import { homeOutline, storefrontOutline, receiptOutline, albumsOutline, logInOutline } from 'ionicons/icons';
+import { homeOutline, storefrontOutline, receiptOutline, albumsOutline, logInOutline, search } from 'ionicons/icons';
 
 
 @Component({
@@ -29,6 +29,6 @@ export class AppComponent {
   ];
   
   constructor() { 
-    addIcons({homeOutline, storefrontOutline, receiptOutline, albumsOutline, logInOutline});
+    addIcons({homeOutline, storefrontOutline, receiptOutline, albumsOutline, logInOutline, search});
   }
 }

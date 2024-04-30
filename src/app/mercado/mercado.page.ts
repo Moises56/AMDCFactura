@@ -1,12 +1,12 @@
 import { Component, ViewChild, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
+import { FormsModule, FormBuilder, FormControl, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { AlertInput, IonicModule } from '@ionic/angular';
 import { IonModal, AlertController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import {MercadoService, Market, newMarket} from '../services/mercado.service';
 import { addIcons } from 'ionicons';
-import { trashOutline, addOutline, createOutline} from 'ionicons/icons';
+import { trashOutline, addOutline, createOutline, create} from 'ionicons/icons';
 import { marketLocals } from '../../interfaces/localidades.interfaces'
 
 
@@ -43,10 +43,6 @@ export class MercadoPage implements OnInit {
   // edit
   messageEdit: string = '';
   
-
-
-
-  
   messageError: string = '';
   messageErrorF: string = '';
   messageAdd: string = '';
@@ -69,12 +65,11 @@ export class MercadoPage implements OnInit {
   
 
   constructor( private MarketS: MercadoService, private alertController: AlertController) {
-    addIcons({trashOutline, addOutline, createOutline});
+    addIcons({trashOutline, addOutline, createOutline, create});
    }
 
   ngOnInit() {
     this.getMarket();
-    
   }
 
 
@@ -269,12 +264,14 @@ export class MercadoPage implements OnInit {
       console.log(response);
       this.MarketLocals = response.data;
       console.log(this.MarketLocals);
-    }
-    );
+    });
 
   }
 
-
+  showAlertFactura(ml: marketLocals) {
+    console.log('Factura', ml);
+    
+  }
 
   onSubmit(): void {
     console.log(this.FormGroup.value);

@@ -3,31 +3,54 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="m1"></ion-menu-button>
     </ion-buttons>
-    <ion-title>ProductList</ion-title>
+    <ion-title>Locales</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">ProductList</ion-title>
+      <ion-title size="large">Locales</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-list>
     <ion-list-header>
-      <ion-label>Productos en Oferta</ion-label>
+      <ion-label class="text-Local"><h1>Locales</h1></ion-label>
+      <ion-button class="new-local" (click)="newLocal(true)">
+        <ion-icon name="add-outline"></ion-icon>Nuevo
+      </ion-button>
     </ion-list-header>
-    @for (product of products; track product._id) {
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <img [src]="product.image" [alt]="product.name" />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{product.name}}</h2>
-        <p>{{product.description}}</p>
-      </ion-label>
-    </ion-item>
+
+    @for (local of locales; track local.id) {
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <!-- <img
+                alt="Silhouette of mountains"
+                src="https://ionicframework.com/docs/img/demos/card-media.png"
+              /> -->
+            <ion-card-header>
+              <ion-card-title>{{local.propietario}}</ion-card-title>
+              <ion-card-subtitle>{{local.nombre_local}}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p><b>DNI:</b> {{local.DNI}}</p>
+              <p><b>Telefono:</b> {{local.telefono}}</p>
+              <p><b>Nombre Local:</b> {{local.nombre_local}}</p>
+              <p><b>Tipo Local:</b> {{local.tipo_local}}</p>
+              <p><b>Monto:</b> {{local.monto}}</p>
+              <p><b>Direccion:</b> {{local.direccion}}</p>
+              <p>
+                <b>Fecha:</b> {{local.fecha_creacion | date: 'dd/MM/yyyy' }}
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     }
   </ion-list>
 </ion-content>

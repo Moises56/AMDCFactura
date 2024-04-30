@@ -1,0 +1,42 @@
+ion-card {
+    --background: #5CCEDF;
+    --color: #000000;
+  }
+  
+  ion-card-title {
+    --color: #52ffe4;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+  
+  ion-card-subtitle {
+    --color: #d1fff8;
+    font-weight: bold;
+    font-size: x-large;
+  }
+
+  .text-Local{
+    color: #5ccedf;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+
+  .new-local{
+    color: #fff;
+    // font-weight: bold;
+    // font-size: x-large;
+    --ion-color-primary: #fff;
+    border-radius: 10rem;
+    width: 100px;
+    margin-left: 60%;
+    position: absolute; 
+    background: #DB473C;
+  }
+
+  // colores AMDC
+// #A1858c gris oscuro
+// #F0C752 amarillo
+// #DDD gris Claro
+// #DB473C rojo
+// #808080 gris
+// #5CCEDF azul claro
